@@ -1,0 +1,29 @@
+5/13/2014 - Tuesday - 2 hours
+time is in hours
+design 	.5
+code	1.5
+bigbug	0
+
+Created Car class, CarTest and CarSetting enum.
+Car class is missing two values timeStep and nextFrontPosition.
+I'm not sure if these values should be stored in this class.
+
+CarTest does not have any tests in it.  
+ I also reviewed the final project documentation. 
+
+Created class packages and included the timeserver in the simulation.agent package.  
+
+5/14/2014 Wednesday - 3 hours
+Reviewed Lecture 7 notes
+Updated Car class to implement Agent
+Created simulation.main.Main to test Car
+Need to determine how to make Car aware of other objects
+Added a traffic light skeleton class
+Added LightState interface for the State pattern
+Added GreenLightState and YellowLightState classes
+Tested the distanceTo method in the Car class; had a issue with the Stop Distance but I figured it out;
+Still not sure what will notify the Car object of the obstacle in front of it. 
+
+
+5/15/2014 Thursday - 1 hour
+Created test for Car and resolved junit failures.
