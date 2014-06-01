@@ -7,27 +7,28 @@ import simulation.components.SimulationSettings;
 import simulation.components.road.CarAcceptor;
 import simulation.components.road.CarSink;
 
-public class CarImpl implements Car{
+public class CarImpl implements Car {
 	// meters/second
-	private double maxVelocity;
+	private double maxVelocity = (int)(Math.random() * (CarSettings.MAX_VELOCITY_MAX.value() - CarSettings.MAX_VELOCITY_MIN.value()) + CarSettings.MAX_VELOCITY_MIN.value());
 	// If distance to nearest obstacle is <= brakeDistance,
 	// then the car will start to slow down (in meters)
-	private double brakeDistance;
+	private double brakeDistance = (int)(Math.random() * (CarSettings.BREAK_DISTANCE_MAX.value() - CarSettings.BREAK_DISTANCE_MIN.value()) + CarSettings.BREAK_DISTANCE_MIN.value());
 	// If distance to nearest obstacle is == stopDistance,
 	// then the car will stop (in meters)
-	private double stopDistance;
-	private double length; // in meters
-	private double distanceToObstacle = Double.MAX_VALUE;
+	private double stopDistance = (int)(Math.random() * (CarSettings.STOP_DISTANCE_MAX.value() - CarSettings.STOP_DISTANCE_MIN.value()) + CarSettings.STOP_DISTANCE_MIN.value());
+	private double length = (int)(Math.random() * (CarSettings.LENGTH_MAX.value() - CarSettings.LENGTH_MIN.value()) + CarSettings.LENGTH_MIN.value());
+	private double distanceToObstacle = 0; //Double.MAX_VALUE;
 	private double frontPosition;
 	private double timeStep;
 	private double currentVelocity;
-	private Simulatable obstacle;
+	//private Simulatable obstacle;
 	private TimeServer time;
 	private CarAcceptor road;
 	private int carnumber = (int)(Math.random() * 1000);
-	
+	private java.awt.Color color = new java.awt.Color((int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255));
+	  	
 	public CarImpl(TimeServer time){
-		this(0.0, 0.0, 0.0, 0.0, time);
+		this.time = time;
 	}
 	
 	public CarImpl(double length, double maxVelocity, double brakeDistance, double stopDistance, TimeServer time) {
@@ -68,6 +69,7 @@ public class CarImpl implements Car{
 	/* (non-Javadoc)
 	 * @see simulation.components.Car#distanceTo(simulation.components.Simulatable)
 	 */
+	/*
 	@Override
 	public void distanceTo(Simulatable obj){
 		distanceToObstacle =  obj.position() - frontPosition;
@@ -76,7 +78,7 @@ public class CarImpl implements Car{
 			frontPosition = obstacle.position() - stopDistance;
 		}
 		obstacle = obj;
-	}
+	}*/
 	
 	/* (non-Javadoc)
 	 * @see simulation.components.Car#position()
@@ -126,8 +128,9 @@ public class CarImpl implements Car{
 	@Override
 	public String toString() {
 		return "Car-" + carnumber + ": current time=" + time.currentTime() + ", current position=" + frontPosition
-				+ ", current road=" + ((road != null)? road.name() : null)
-				+ ", obstacle=[" + obstacle + "]\n"
+				//+ ", current road=" + ((road != null)? road.name() : null)
+				+ ", current road=[" + road + "]"
+				+ ", obstacle=[]\n"
 				+ ", distance to obstacle =" + distanceToObstacle
 				+ ", current velocity=" + currentVelocity
 				+ ", stop distance=" + stopDistance + ", brake distance=" + brakeDistance
@@ -202,4 +205,8 @@ public class CarImpl implements Car{
 	public void setFrontPosition(double frontPosition){
 		this.frontPosition = frontPosition;
 	}
+	
+	public java.awt.Color getColor() {
+	    return color;
+	  }
 }

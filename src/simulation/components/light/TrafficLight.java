@@ -11,7 +11,7 @@ import simulation.components.car.Car;
 import simulation.components.road.CarAcceptor;
 import simulation.components.road.CarSink;
 
-public class TrafficLight implements CarAcceptor{
+public class TrafficLight implements CarAcceptor, Agent{
 	//if current state is Yellow then NS is Red
 	//if the current state is Red then NS is Green
 	//if the current state is Green then NS is Red
@@ -49,9 +49,17 @@ public class TrafficLight implements CarAcceptor{
 				+ (TrafficLightSettings.YELLOW_MAX.value() - TrafficLightSettings.YELLOW_MIN
 						.value()) * random.nextDouble();
 		yellowTime =  Double.parseDouble(df.format(randomValue));
-		roadLength = 50.0;
+		
+		randomValue = IntersectionLength.MIN.value()
+				+ (IntersectionLength.MAX.value() - IntersectionLength.MIN
+						.value()) * random.nextDouble();
+		roadLength =  Double.parseDouble(df.format(randomValue));
 	}
 	
+	public TrafficLight(TimeServer time, TrafficDirection direction){
+		this(time);
+		this.direction = direction;
+	}
 	/*
 	 * Changes the state of the traffic light.
 	 */
@@ -105,6 +113,12 @@ public class TrafficLight implements CarAcceptor{
 		return carBackPosition;
 	}
 	
+	
+	@Override
+	public void run() {
+		
+	}
+
 	public void setState(LightState state){
 		if(state == null)
 			throw new IllegalArgumentException("LightState arg is null.");
@@ -129,7 +143,11 @@ public class TrafficLight implements CarAcceptor{
 	
 	@Override
 	public String toString() {
-		return name + ": current state=" + currentState + ", # of cars=" + cars.size();
+		return name + ": current state=" + currentState 
+				+ ", greentime=" + greenTime
+				+ ", yellowtime=" + yellowTime
+				+ "# of cars=" + cars.size()
+				+ "diretion=" + direction;
 	}	
 
 	@Override
@@ -142,6 +160,11 @@ public class TrafficLight implements CarAcceptor{
 		if(next == null)
 			throw new IllegalArgumentException("CarAcceptor arg is null.");
 		nextRoad = next;	
+	}
+	
+	@Override
+	public CarAcceptor getNext() {
+		return nextRoad;	
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public interface Car extends Agent{
 	 * Calculate the distance to another object.
 	 * @param car
 	 */
-	public abstract void distanceTo(Simulatable obj);
+	//public abstract void distanceTo(Simulatable obj);
 
 	public abstract double position();
 
@@ -36,5 +36,7 @@ public interface Car extends Agent{
 	public abstract void setFrontPosition(double frontPosition);
 	
 	public abstract CarAcceptor getCurrentRoad();
+	
+	public abstract java.awt.Color getColor();
 
 }

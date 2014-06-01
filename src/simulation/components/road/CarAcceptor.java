@@ -10,4 +10,5 @@ public interface CarAcceptor {
 	public void setNext(CarAcceptor next);
 	public int count();
 	public TrafficDirection getDirection();
+	public CarAcceptor getNext();
 }

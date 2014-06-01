@@ -42,5 +42,6 @@ public class CarSink implements CarAcceptor {
 	public TrafficDirection getDirection() { return direction;	}
 	
 	public void setDirection(TrafficDirection direction) { this.direction = direction;} 
-		
+	
+	public CarAcceptor getNext(){ return null;}
 }

@@ -15,6 +15,10 @@ public class CarBuilder {
 	private double length; // in meters
 	private CarAcceptor road;
 	
+	public CarBuilder(){
+		
+	}
+	
 	public CarBuilder(TimeServer time, CarAcceptor road){
 		this.time = time;
 		this.road = road;
@@ -51,7 +55,8 @@ public class CarBuilder {
 	}
 	
 	public Car build(){	
-		Car temp = new CarImpl(length, maxVelocity, brakeDistance, stopDistance, time);
+		//Car temp = new CarImpl(length, maxVelocity, brakeDistance, stopDistance, time);
+		Car temp = new CarImpl(time);
 		temp.setCurrentRoad(road);
 		return temp;
 	}

@@ -13,11 +13,15 @@ import simulation.components.road.CarAcceptor;
 import simulation.components.road.CarSink;
 import simulation.components.road.CarSource;
 import simulation.components.road.RoadBuilder;
+import simulation.components.segment.SimpleBuilder;
+import simulation.ui.Model;
+import simulation.ui.SwingAnimatorBuilder;
 
 public class Simulation {
-
+	static TimeServer time; 
 	public static void main(String[] args) {
-		TimeServer time = new TimeServerLinked();
+		//time = new TimeServerLinked();
+		/*
 		TrafficLight light = new TrafficLight(time);
 		RoadBuilder roadBuilder = new RoadBuilder();
 
@@ -40,6 +44,23 @@ public class Simulation {
 		time.enqueue(0, carsource);
 		// time.enqueue(0,light);
 		time.run(50);
-
+		*/
+		
+		//runUITest();
+		printTest();
+	}
+	
+	public static void printTest(){
+		time = new TimeServerLinked();
+		SimpleBuilder simple = new SimpleBuilder(time);
+		simple.build();
+		time.run(SimulationSettings.runTime());
+	}
+	
+	public static void runUITest(){
+		 //Model m = new Model(new SwingAnimatorBuilder(), 2, 3);
+		Model m = new Model(new SwingAnimatorBuilder(), 2, 3);
+	     m.run(SimulationSettings.runTime());
+	     m.dispose();		
 	}
 }
